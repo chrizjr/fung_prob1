@@ -1,0 +1,43 @@
+<!doctype html>
+<title>Dashboard</title>
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='lib/css/bootstrap.min.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<div class="application">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">You're it for Inspire</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <h2>
+    <div class=metanav>
+    {% if not session.logged_in %}
+      <a href="{{ url_for('login') }}">Log in</a>
+    {% else %}
+      <a href="{{ url_for('logout') }}">Log out</a>
+    {% endif %}
+    </div>
+  </h2>
+
+  <div class="tablist">
+      <h2>
+        <a href="{{ url_for('Apparel') }}">Apparel</a>   /
+        <a href="{{ url_for('ConsumerGoods') }}">Consumer Goods</a>
+
+      </h2>
+  </div>
+  <h3>
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+  {% endfor %}
+  </h3>
+<!--<br/>-->
+<h3>
+  {% block body %}{% endblock %}
+ </h3>
