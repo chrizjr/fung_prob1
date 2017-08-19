@@ -11,24 +11,25 @@
   /*padding-left: 0px;*/
   /*padding-right: 0px;*/
 /*}*/
-body.application div[class^="col-"] {
-  padding-left: 5px;
-  padding-right: 5px;
-}
-body.application div[class^="col-"] div[class^="col-"] {
-  padding-left: 15px;
-  padding-right: 15px;
-}
+/*body.application div[class^="col-"] {*/
+  /*padding-left: 5px;*/
+  /*padding-right: 5px;*/
 
-body.application hr {
-  border-color: #d7d7d7;
-  margin: 10px 0;
-}
+/*}*/
+/*body.application div[class^="col-"] div[class^="col-"] {*/
+  /*padding-left: 15px;*/
+  /*padding-right: 15px;*/
+/*}*/
 
+/*body.application hr {*/
+  /*border-color: #FFE4C4;*/
+  /*margin: 10px 0;*/
+
+/*}*/
 
 .chart-wrapper {
-  background: #ffffff;
-  border: 1px solid #ffffff;
+  background: #fffaf0;
+  border: 1px solid #fffaf0;
   border-radius: 3px;
   margin-bottom: 10px;
 }
@@ -50,9 +51,9 @@ body.application hr {
 }
 
 .chart-wrapper .chart-notes {
-  background: #fbfbfb;
+  background: #fffaf0;
   border-top: 1px solid #e2e2e2;
-  color: #808080;
+  color: #cef1ff;
   font-size: 12px;
   padding: 8px 10px 5px;
 }

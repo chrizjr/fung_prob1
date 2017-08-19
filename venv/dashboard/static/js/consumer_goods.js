@@ -87,7 +87,7 @@ function makeGraphs(error, region_data) {
 		.x(d3.scale.ordinal())
 		.xUnits(dc.units.ordinal)
 		.elasticY(true)
-		.colors("#FF8DA1")
+		.colors("#cef1ff")
 		.yAxisLabel("photos uploaded")
 		.xAxisLabel("Year-Month")
 		.yAxis().ticks(6);
