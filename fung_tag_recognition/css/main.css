@@ -20,12 +20,21 @@ body { margin: 0 auto;
     position: absolute;
 }
 
+#title_demo{
+    text-align:left;
+    position: absolute;
+    color:dimgrey;
+    margin-top: -2%;
+    width: 80vh;
+    margin-left:55%;
+    font-family: 'Josefin Sans', sans-serif;
 
+}
 
 .file-upload{
     background-color: darkgrey;
     width: 45vh;
-    border-radius: 20%;
+    border-radius: 10%;
     padding: 6px; 12px;
     cursor: pointer;
     color: white;
@@ -37,6 +46,7 @@ body { margin: 0 auto;
     overflow:hidden; 
     margin-left:42%;
     width:300px; 
+    border-radius:20%;
     height:350px;
     background:#f3f3f3; 
     border:2px dashed #e8e8e8;
@@ -86,4 +96,10 @@ body { margin: 0 auto;
   border: 1px solid #357ebd;
   border-radius: 4px;
   color: #fff;
+}
+
+.col_names{
+    width: 40vh;
+    background-color: aliceblue;
+    padding: 5px;
 }

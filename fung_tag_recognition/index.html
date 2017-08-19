@@ -1,6 +1,7 @@
 <!-- Bootstrap --> 
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -12,12 +13,7 @@
                 <div class="container" style="padding:3%; position: absolute; ">
                     <div class="row">
                     <div class="col-sm-4 col-sm-offset-4">
-                       <!--
-                        <label class="file-upload">
-                                Browse Image
-                            <input type="file" name="userprofile_picture" id="filePhoto" onchange="previewFile()"><br>
-                            </label>
-                        --->
+                            <h1 id="title_demo"> Upload Picture </h1>
                             <br><br><br>
                             <div class="uploader">
                                 <img id="uploaded" style="display: none" src=""/>
@@ -28,18 +24,21 @@
                     </div>
                     </div>
                     <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4" style="border:solid; width: 80vh;"> 
-                       
+                    
+                       <center style="margin-left:32vh;">
                       
                                 <div class="form-group">
                                     <input type="text" id="tags2" name="tags_input" data-role="tagsinput" class="form-control"/>
                                 </div>   
                             
-                    </div>
+                        </center>
                     </div>
                     <div class="row">
-                        <div class="tag"></div>
-                        <div class="col_names"></div>
+                        <center style="margin-left:32vh;">
+                            <div>
+                            <ul class="col_names"></ul>
+                            </div>
+                        </center>
                     </div>
                     
                     
@@ -63,15 +62,17 @@
     } else {
     alert('The File APIs are not fully supported in this browser.');
   }
-    
+    /*
    function previewFile(){
        var preview = document.querySelector('img'); //selects the query named img
        var file    = document.querySelector('input[type=file]').files[0]; //sames as here
        var reader  = new FileReader();
        reader.onloadend = function () {
+           /*
            preview.src = reader.result;
            $(preview).show()
-       }
+           */
+       /*}/*
 
        if (file) {
            reader.readAsDataURL(file); //reads the data as a URL
@@ -81,6 +82,7 @@
   }
 
   previewFile();  //calls the function named previewFile()
+    */
 
 </script>
 
