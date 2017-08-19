@@ -69,7 +69,7 @@ function makeGraphs(error, region_data) {
 	var materialChart = dc.rowChart('#material-chart');
 	var trendyearChart = dc.rowChart('#trendyear-chart');
 	var festivitiesChart = dc.pieChart('#festivities-chart');
-	var themeChart = dc.pieChart('#theme-chart')
+	var themeChart = dc.pieChart('#theme-chart');
 
 	countChart
 		.formatNumber(d3.format("d"))
@@ -78,7 +78,7 @@ function makeGraphs(error, region_data) {
 
 
 	uploadDateChart
-		.width(750)
+		.width(950)
 		.height(220)
 		.margins({top: 10, right: 50, bottom: 40, left: 50})
 		.dimension(dateDim)
@@ -87,7 +87,11 @@ function makeGraphs(error, region_data) {
 		.xUnits(dc.units.ordinal)
 		.elasticY(true)
 		.colors("#FF8DA1")
-		.yAxis().ticks(6);
+		.yAxisLabel("photos uploaded")
+		.xAxisLabel("Year-Month")
+		.yAxis().ticks(6)
+
+	;
 
 	seasonChart
 		.width(400)

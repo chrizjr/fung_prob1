@@ -79,7 +79,7 @@ function makeGraphs(error, region_data) {
 
 
 	uploadDateChart
-		.width(750)
+		.width(950)
 		.height(220)
 		.margins({top: 10, right: 50, bottom: 40, left: 50})
 		.dimension(dateDim)
@@ -88,6 +88,8 @@ function makeGraphs(error, region_data) {
 		.xUnits(dc.units.ordinal)
 		.elasticY(true)
 		.colors("#FF8DA1")
+		.yAxisLabel("photos uploaded")
+		.xAxisLabel("Year-Month")
 		.yAxis().ticks(6);
 
 	seasonChart

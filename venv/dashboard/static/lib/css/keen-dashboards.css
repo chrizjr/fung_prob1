@@ -46,7 +46,7 @@ body.application hr {
   overflow: hidden;
   padding: 5px 10px;
   position: relative;
-  font-family: "Gill Sans";
+  font-family: "Arial";
 }
 
 .chart-wrapper .chart-notes {
