@@ -14,7 +14,6 @@
         try {
             var color = data['color']['dominantColors'];
         }
-
         catch(err) {
             var color = data['color']['dominantColorsForeground'];
         }
@@ -57,29 +56,89 @@
         else {
         alert('The File APIs are not fully supported in this browser.');
         }
-        previewFile();
+        console.log('123')
+        previewFile().then(function(data){
+            console.log(data);
+            call_base64(data);    
+        });
+
+
+
     }
-        
-   function previewFile(){
+    function previewFile(){
        var preview = document.querySelector('img'); //selects the query named img
-       var file    = document.querySelector('input[type=file]').files[0]; //selects the image uploaded
+       var file    = document.querySelector('input[type=file]'); //selects the image uploaded
        var reader  = new FileReader();
+       var base64 = '';
 
-       reader.onloadend = function () {
-           preview.src = reader.result;
-           $(preview).show()
-       };
+       var documentLoad = new Promise(function(resolve, reject){
+            document.onload = function(){
+                resolve(document.querySelector('input[type=file]').files[0]);
+            }
+       });
 
-       if (file) {
-           binary = reader.readAsDataURL(file);
-           // binary = binary.replace(/^data:image\/(png|jpg);base64,/, "")+
-           // binary = to_binary(file);
-           console.log(binary) //reads the data as a URL
-       } else {
-           preview.src = "";
-       }
+       return documentLoad().then(function(files){
+                reader.readAsDataURL(files);
+                console.log(files);
+               reader.onloadend = function () {
+                    base64 = reader.result;
+                   preview.src = reader.result;
+                   $(preview).show();
+                   resolve(base64);
+               };           
+
+       });
+    };
+
+    function call_base64(img_string){
+
+        var subscriptionKey = "be204c22deb64dc1a77b612327cbf6d3";
+
+        // Replace or verify the region.
+        //
+        // You must use the same region in your REST API call as you used to obtain your subscription keys.
+        // For example, if you obtained your subscription keys from the westus region, replace
+        // "westcentralus" in the URI below with "westus".
+        //
+        // NOTE: Free trial subscription keys are generated in the westcentralus region, so if you are using
+        // a free trial subscription key, you should not need to change this region.
+        var uriBase = "https://westcentralus.api.cognitive.microsoft.com/vision/v1.0/analyze";
+
+        // Request parameters.
+        var params = {
+            "visualFeatures": "Categories,Description,Color",
+            "details": "",
+            "language": "en",
+        };
+
+        // Perform the REST API call.
+        $.ajax({
+            url: uriBase + "?" + $.param(params),
+
+            // Request headers.
+            beforeSend: function(xhrObj){
+                xhrObj.setRequestHeader("Content-Type","application/octet-stream");
+                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key", subscriptionKey);
+            },
+
+            type: "POST",
+
+            // Request body.
+            data: img_string,
+        })
+
+        .done(function(data) {
+            // Show formatted JSON on webpage.
+            $("#responseTextArea").val(JSON.stringify(data, null, 2));
+        })
+
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            // Display error message.
+            var errorString = (errorThrown === "") ? "Error. " : errorThrown + " (" + jqXHR.status + "): ";
+            errorString += (jqXHR.responseText === "") ? "" : jQuery.parseJSON(jqXHR.responseText).message;
+            alert(errorString);
+        });
     }
-
 
     function processImage() {
         // **********************************************
@@ -145,7 +204,7 @@
 Enter the URL to an image of a natural or artificial landmark, then click the <strong>Analyze image</strong> button.
 <br><br>
     
-<input type="file" onchange="previewFile()"><br>
+<input type="file" onchange= "upload_image()"><br>
 
 Image to analyze: <input type="text" name="inputImage" id="inputImage" value="http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg" />
 <button onclick="processImage()">Analyze image</button>
