@@ -118,7 +118,7 @@ function makeGraphs(error, region_data) {
 		.label(function(d) {
 			return d.key + " (" + Math.floor(d.value / freqCount.value()*100)   + "%)";
 		})
-		.colors(d3.scale.ordinal().range(['#8c8c8c', '#80d4ff', '#b3b3ff', '#b3ffcc', '#ffc34d', '#ffcc99']))
+		.colors(d3.scale.ordinal().range(['#8c8c8c', '#80d4ff', '#b3b3ff', '#b3ffcc', '#ffc34d', '#ffcc99', '#f2a7b7']))
 	;
 
 
