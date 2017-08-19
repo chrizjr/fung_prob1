@@ -1,33 +1,38 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.preprocessing import LabelEncoder 
-
-data = pd.read_excel("Metadata.xlsx")
-photo = data['photoId'].values
-
-tags = data['tagName']
-
-photo_tag = {}
-
-for i in np.unique(photo):
-	photo_match = data[data['photoId']==i]
-	temp_tag = photo_match['tagName'].values
-	photo_tag[i] = temp_tag
-
-print(photo_tag)
+import requests 
+import base64
+import http.client, urllib.request, urllib.parse, urllib.error, base64
 
 
+base_url = 'https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze?language=en&Ocp-Apim-Subscription-Key='
+sub_key = 'f7a9e29b-fbca-4adb-a18e-5a169d3906f0'
 
-unique_tags = np.unique(tags, return_counts=True)
-tags_token = LabelEncoder()
-tokenized = tags_token.fit_transform(tags)
+request_url = base_url+sub_key
 
-top_10 = [ unique_tags[0][i] for i in range(len(unique_tags[0])) if unique_tags[1][i]>=5]
+image_address = 'Desktop/fung_prob1/Images'
 
-print (top_10)
+with open(image_address, 'rb') as img:
+	imgstr = base64.b64encode(img.read())
 
 
-# sns.barplot(unique_tags[0], unique_tags[1])
-# plt.show()
+headers = {
+    # Request headers
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': '{subscription key}',
+}
+
+params = urllib.parse.urlencode({
+    # Request parameters
+    'visualFeatures': 'Categories',
+    'details': '{string}',
+    'language': 'en',
+})
+
+try:
+    conn = http.client.HTTPSConnection('westus.api.cognitive.microsoft.com')
+    conn.request("POST", "/vision/v1.0/analyze?%s" % params, "{body}", headers)
+    response = conn.getresponse()
+    data = response.read()
+    print(data)
+    conn.close()
+except Exception as e:
+    print("[Errno {0}] {1}".format(e.errno, e.strerror))
