@@ -38,7 +38,7 @@
   color: #666;
   font-size: 18px;
   font-weight: 200;
-  font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+  font-family: "Poiret One"
   padding: 7px 10px 4px;
 }
 
@@ -47,7 +47,7 @@
   overflow: hidden;
   padding: 5px 10px;
   position: relative;
-  font-family: "Arial";
+  font-family: "Poiret One";
 }
 
 .chart-wrapper .chart-notes {
