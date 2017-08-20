@@ -9,20 +9,24 @@ function handleImage(e) {
         $('#uploaded').attr('src',event.target.result);
         
     }
+
+    reader.onloadend = function(){
+        console.log('fired');
+        context = reader.result;
+        passable = makeblob(context);
+        img_post(passable);
+    }
     reader.readAsDataURL(e.target.files[0]);
     
-    reader.onloadend=function(){
-        
-    }
 }
 
-function previewFile(){
-    var preview = document.getElementById("uploaded");
-    var file = document.querySelector('input[type=file]').files[0];
-    var reader = new FileReader();
-    img_post(reader.result);
-    pass_data = makeblob(reader.result);
-}
+// function previewFile(){
+//     // var preview = document.getElementById("uploaded");
+//     var file = document.querySelector('input[type=file]').files[0];
+//     var reader = new FileReader();
+
+
+// }
 
 
 function makeblob(dataURL){
@@ -40,6 +44,7 @@ function makeblob(dataURL){
 function json_parser(descriptions){
 		text = document.getElementById('jsondisplay');
 		display_json = feat_extract(descriptions);
+        console.log(display_json);
 		text.value = JSON.stringify(display_json, null, 4);
 	}
 

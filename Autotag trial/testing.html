@@ -12,6 +12,7 @@
 
 	       reader.onloadend = function () {
 	       	   img_post(reader.result);
+	       	   console.log(reader.result);
 	       	   pass_data = makeblob(reader.result);
 	       	   console.log(pass_data);
 	       	   img_post(pass_data);
@@ -24,22 +25,6 @@
 	           preview.src = "";
 	       }
 	  }
-
-	function makeblob(dataURL){
-		var base64_maker = ';base64,'
-		var parts = dataURL.split(base64_maker);
-		var contentType = parts[0].split(':')[1];
-		var raw  = window.atob(parts[1]);
-		var rawLength = raw.length;
-
-		var uint8arr = new Uint8Array(rawLength);
-
-		for (var i=0; i<rawLength; i++){
-			uint8arr[i] = raw.charCodeAt(i);
-		}
-
-		return new Blob([uint8arr], {type:contentType});
-	}
 	function json_parser(descriptions){
 		text = document.getElementById('jsondisplay');
 
@@ -61,6 +46,23 @@
 
 		return proc_json
 	}
+
+	function makeblob(dataURL){
+		var base64_maker = ';base64,'
+		var parts = dataURL.split(base64_maker);
+		var contentType = parts[0].split(':')[1];
+		var raw  = window.atob(parts[1]);
+		var rawLength = raw.length;
+
+		var uint8arr = new Uint8Array(rawLength);
+
+		for (var i=0; i<rawLength; i++){
+			uint8arr[i] = raw.charCodeAt(i);
+		}
+
+		return new Blob([uint8arr], {type:contentType});
+	}
+
 
 	function img_post(raw_data) {
         var params = {
@@ -84,6 +86,10 @@
         .done(function(data) {
         	console.log(data)
             json_parser(data);
+        })
+        .fail(function(data){
+        	console.log(data);
+
         })
     };
 </script>
