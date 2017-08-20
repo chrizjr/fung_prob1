@@ -42,48 +42,59 @@ function makeblob(dataURL){
 		return new Blob([uint8arr], {type:contentType});
 	}
 function json_parser(descriptions){
-		text = document.getElementById('jsondisplay');
+		// text = document.getElementById('jsondisplay');
 		display_json = feat_extract(descriptions);
         console.log(display_json);
-		text.value = JSON.stringify(display_json, null, 4);
+		// text.value = JSON.stringify(display_json, null, 4);
 	}
 
-	function feat_extract(jsonformat){
-		//This is specific to ms azure
-		var tags = jsonformat['description']['tags'].slice(0,3);
-		var verbal_description = jsonformat['description']['captions'];
-		var colors = jsonformat['color']['dominantColors'];
-		var proc_json = {
-			'tags':tags,
-			'description': verbal_description,
-			'dominant colors':colors
-		}
-		return proc_json
+function feat_extract(jsonformat){
+	//This is specific to ms azure
+	var tags = jsonformat['description']['tags'];
+	var verbal_description = jsonformat['description']['captions'];
+	var colors = jsonformat['color']['dominantColors'];
+
+    ind = tags.indexOf('indoor')
+    outd = tags.indexOf('outdoor')
+    if (ind>0){
+        // console.log('indoor'.indexOf(tag))
+        tags.splice(ind,1)
+    }
+    else if (outd){
+        tags.splice(outd,1)
+    }
+
+	var proc_json = {
+		'tags':tags.splice(0,3),
+		'description': verbal_description,
+		'dominant colors':colors
 	}
-	function img_post(raw_data) {
-        var params = {
-            // Request parameters
-            "visualFeatures":'Categories, Tags, Description, Color',
-            "language":'en'
-        };
-      
-        $.ajax({
-            url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze?" + $.param(params),
-            beforeSend: function(xhrObj){
-                // Request headers
-                xhrObj.setRequestHeader("Content-Type","application/octet-stream");
-                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","a947bbe94cb342d3baecae9040362f4d");
-            },
-            type: "POST",
-            // Request body
-            data: raw_data,
-            processData:false
-        })
-        .done(function(data) {
-        	console.log(data)
-            json_parser(data);
-        })
+	return proc_json
+}
+function img_post(raw_data) {
+    var params = {
+        // Request parameters
+        "visualFeatures":'Categories, Tags, Description, Color',
+        "language":'en'
     };
+  
+    $.ajax({
+        url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze?" + $.param(params),
+        beforeSend: function(xhrObj){
+            // Request headers
+            xhrObj.setRequestHeader("Content-Type","application/octet-stream");
+            xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","a947bbe94cb342d3baecae9040362f4d");
+        },
+        type: "POST",
+        // Request body
+        data: raw_data,
+        processData:false
+    })
+    .done(function(data) {
+    	console.log(data)
+        json_parser(data);
+    })
+};
 
 
 var accessToken = "a0e3d49509684e11a150e8afff2022e8";
