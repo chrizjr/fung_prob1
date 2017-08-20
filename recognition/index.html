@@ -1,6 +1,7 @@
 <!-- Bootstrap --> 
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -9,31 +10,38 @@
     <div class="row">
         <section class="full_screen">
             <div class="inner">
-                <div class="container" style="padding:5%; position: absolute; margin-left: 5%">
+                <div class="container" style="padding:3%; position: absolute; ">
                     <div class="row">
-                        
-                        <div class="col-sm-4"></div>
-                        <div class="col-sm-4">
-                            <label class="file-upload" style="margin-left: 40%">
-                                Browse Image
-                            <input type="file" name="userprofile_picture" id="filePhoto" onchange="previewFile()"><br>
-                            </label>
+                    <div class="col-sm-4 col-sm-offset-4">
+                            <h1 id="title_demo"> Upload Picture </h1>
                             <br><br><br>
                             <div class="uploader">
-                                Drag your picture!
-                                <img id="uploaded" src=""/>
+                                <img id="uploaded" style="display: none" src=""/>
+                                 <input type="file" name="userprofile_picture" id="filePhoto" onchange="previewFile()">
+                                <img src="img/upload.png" id="file_logo" style="width:150px; height:150px; margin-top: 90px;margin-left:70px">
                             </div>
-                            <br><br>
-                            <div>
-                                <form>
-                                    <label for="d1">#</label>
-                                    <input type="text" id="d1" name="desc1">
-                                    <button id="sub" type="submit" value="Add" onclick="sendRequest(event)"></button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-sm-4"></div>
+                            <br>
                     </div>
+                    </div>
+                    <div class="row">
+                    
+                       <center style="margin-left:32vh;">
+                      
+                                <div class="form-group">
+                                    <input type="text" id="tags2" name="tags_input" data-role="tagsinput" class="form-control"/>
+                                </div>   
+                            
+                        </center>
+                    </div>
+                    <div class="row">
+                        <center style="margin-left:32vh;">
+                            <div>
+                            <ul class="col_names"></ul>
+                            </div>
+                        </center>
+                    </div>
+                    
+                    
                 </div>
             </div>
         </section>
@@ -54,15 +62,17 @@
     } else {
     alert('The File APIs are not fully supported in this browser.');
   }
-    
+    /*
    function previewFile(){
        var preview = document.querySelector('img'); //selects the query named img
        var file    = document.querySelector('input[type=file]').files[0]; //sames as here
        var reader  = new FileReader();
        reader.onloadend = function () {
+           /*
            preview.src = reader.result;
            $(preview).show()
-       }
+           */
+       /*}/*
 
        if (file) {
            reader.readAsDataURL(file); //reads the data as a URL
@@ -72,6 +82,7 @@
   }
 
   previewFile();  //calls the function named previewFile()
+    */
 
 </script>
 
@@ -79,4 +90,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 <script src="main.js"></script>
